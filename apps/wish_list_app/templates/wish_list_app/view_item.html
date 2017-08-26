@@ -1,0 +1,16 @@
+<html>
+    <head>
+       <title>View User</title>
+    </head>
+    <body>
+      <a href="/dashboard">Home</a>
+      <a href="/logout">Log Out</a>
+      <div id="item_details">
+          <h1>{{item.item}}</h1>
+          <h2>Users who added this product to their wish list:</h2>
+          {% for item_wishlisted_user in item_wishlisted_users %}
+            <p>{{item_wishlisted_user.name}}</p>
+          {% endfor %}
+      </div>
+    </body>
+</html>

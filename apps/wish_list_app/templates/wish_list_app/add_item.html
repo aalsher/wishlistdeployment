@@ -1,0 +1,25 @@
+<html>
+    <head>
+       <title>Add An Item</title>
+    </head>
+    <body>
+        {% if messages %}
+          <ul class="messages">
+              {% for message in messages %}
+              <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+              {% endfor %}
+          </ul>
+        {% endif %}
+
+        <div id="new_item_form">
+            <h1>Add An Item</h1>
+            <a href="/dashboard">Home</a>
+            <a href="/logout">Log Out</a>
+            <form action='/items/newitem/' method='post'>
+                {% csrf_token %}
+                Item/Product:<input type='text' name='item'><br>
+                <input type='submit' value='Add'>
+            </form>
+        </div>
+    </body>
+</html>

@@ -1,0 +1,60 @@
+<html>
+    <head>
+       <title>Dashboard</title>
+
+    </head>
+    <body>
+      {% if messages %}
+          <ul class="messages">
+              {% for message in messages %}
+              <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+              {% endfor %}
+          </ul>
+        {% endif %}
+
+      <h1>Welcome, {{user.name}}</h1>
+      <a href="/logout">Logout</a>
+
+      <div id= "user_wishlist">
+        <h2>Your Wishlist:</h2>
+          <table>
+              <tr>
+                <th>Item</th>
+                <th>Added by</th>
+                <th>Date Added</th>
+                <th>Action</th>
+              </tr><br>
+              {% for user_wishlist_item in user_wishlist_items %}
+                <tr><td><a href="/items/{{user_wishlist_item.id}}">{{user_wishlist_item.item}}</a></td>
+                <td>{{user_wishlist_item.item_uploader.name}}</td>
+                <td>{{user_wishlist_item.created_at}}</td>
+                {% if user_wishlist_item.item_uploader.id == user.id %}
+                  <td><a href= "/items/delete/{{user_wishlist_item.id}}">Delete Item</a></td><br>
+                {% else %}
+                  <td><a href= "/items/wishlist/delete/{{user_wishlist_item.id}}">Delete Item from Wishlist</a></td>
+                </tr><br>
+                {% endif %}
+              {% endfor %}
+          </table>
+        </div>
+
+      <div id= "all_items">
+        <h2>Other Users' Wish Lists:</h2>
+          <table>
+            <tr>
+              <th>Item</th>
+              <th>Added by</th>
+              <th>Date Added</th>
+              <th>Action</th>
+            </tr><br>
+            {% for item in items %}
+              <tr><td><a href="/items/{{item.id}}">{{item.item}}</a></td>
+              <td>{{item.item_uploader.name}}</td>
+              <td>{{item.created_at}}</td>
+              <td><a href="/items/wishlist/add/{{item.id}}">Add to my Wishlist</a></td></tr><br>
+            {% endfor %}
+          </table>
+      </div>
+      <a href="/items/add">Add New Item</a>
+    </body>
+</html>

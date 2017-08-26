@@ -1,0 +1,40 @@
+<html>
+    <head>
+       <title>Register Or Log In</title>
+    </head>
+    <body>
+
+      {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+            <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+            {% endfor %}
+        </ul>
+      {% endif %}
+        <h1> Welcome! </h1>
+        <div id="registration_form">
+            <h1>Register</h1>
+            <form action='/create' method='post'>
+                {% csrf_token %}
+                Name:<input type='text' name='name'>
+                Username:<input type='text' name='username'>
+                Password:<input type='password' name='password'>
+                Date Hired: <input type='date' name='date_hired'>
+                <p>*Password should be at least 8 characters</p>
+                Confirm Password:<input type='password' name='confirm_password'>
+                <input type='submit' value='Register'>
+            </form>
+        </div>
+
+        <div id="login">
+            <h1>Log In</h1>
+            <form action='/login' method='post'>
+                {% csrf_token %}
+                Username:<input type='text' name='login_username'>
+                Password:<input type='password' name='login_password'>
+                <input type='submit' value='Login'>
+            </form>
+        </div>
+
+    </body>
+</html>
